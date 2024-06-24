@@ -1,0 +1,59 @@
+<simulation verbosity='medium'>
+  <output prefix='simu_3'>
+    <properties stride='4' filename='out'>  [ step, time{picosecond}, conserved{electronvolt}, temperature{kelvin}, kinetic_cv{electronvolt}, potential{electronvolt}] </properties>
+    <trajectory filename='xc' stride='4' format='xyz'> x_centroid{angstrom} </trajectory>
+    <checkpoint filename='checkpoint' stride='4' overwrite='True'/>
+  </output>
+  <total_steps>40000</total_steps>
+  <prng>
+    <seed>31415</seed>
+  </prng>
+  <ffgencavsocket name='lammps' mode='unix' pbc='True'>
+	  <address>co2.loss300.E0_5e-5.traj_3</address>
+	  <latency> 1e-4 </latency>
+	  <n_independent_bath> 36 </n_independent_bath>
+	  <apply_photon> True </apply_photon>
+	  <E0> 5e-5 </E0>
+	  <omega_c units='inversecm'> 2320 </omega_c>
+	  <domega_x units='inversecm'> 50.0 </domega_x>
+	  <domega_y units='inversecm'> 0.0 </domega_y>
+	  <n_mode_x> 36 </n_mode_x>
+	  <n_mode_y> 1 </n_mode_y>
+	  <x_grid_1d> [0.02702703, 0.05405405, 0.08108108, 0.10810811, 0.13513514,
+       0.16216216, 0.18918919, 0.21621622, 0.24324324, 0.27027027,
+       0.2972973 , 0.32432432, 0.35135135, 0.37837838, 0.40540541,
+       0.43243243, 0.45945946, 0.48648649, 0.51351351, 0.54054054,
+       0.56756757, 0.59459459, 0.62162162, 0.64864865, 0.67567568,
+       0.7027027 , 0.72972973, 0.75675676, 0.78378378, 0.81081081,
+       0.83783784, 0.86486486, 0.89189189, 0.91891892, 0.94594595,
+       0.97297297]  </x_grid_1d>
+	  <y_grid_1d> [0.] </y_grid_1d>
+	  <ph_constraint> none </ph_constraint>
+	  <ph_rep> dense </ph_rep>
+	  <charge_array> [0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256, 0.6512, -0.3256, -0.3256]  </charge_array>
+  </ffgencavsocket>
+  <system>
+    <initialize nbeads='1'>
+      <file mode='chk'> init_2.checkpoint </file>
+      <cell mode='manual' units='atomic_unit'>
+	    [25.263, 0.0, 0.0, 0.0, 25.263, 0.0, 0.0, 0.0, 25.263]
+      </cell>
+      <velocities mode='thermal' units='kelvin'> 300 </velocities>
+    </initialize>
+    <forces>
+      <force forcefield='lammps'> </force>
+    </forces>
+    <motion mode='dynamics'>
+      <dynamics mode='nvt'>
+        <timestep units='femtosecond'> 0.5 </timestep>
+	 <thermostat mode='cavloss_multilangevin'>
+          <tau_m units='femtosecond'> 1e10 </tau_m>
+          <tau_l units='femtosecond'> 300 </tau_l>
+        </thermostat>
+      </dynamics>
+    </motion>
+    <ensemble>
+      <temperature units='kelvin'> 300 </temperature>
+    </ensemble>
+  </system>
+</simulation>
