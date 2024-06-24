@@ -8,4 +8,4 @@ The folder **demo/** contains all the necessary files to run a single Fabry-Pero
 - input.xml: the section **ffgencavsocket** contains all the information to setup the 1D Fabry-Perot VSC simulation; see also Table 1 in the paper for a one-to-one correspondance of the parameters.
 
 
-The folder **raw_data/** contains all the input files and raw data to reproduce the figures in the abvoe publication. Please go to **raw_data/plotting/** and run the corresponding python scripts to plot the figures.
+The folder **raw_data/** contains all the input files and raw data to reproduce the figures in the above publication. Please go to **raw_data/plotting/** and run the corresponding python scripts to plot the figures.
